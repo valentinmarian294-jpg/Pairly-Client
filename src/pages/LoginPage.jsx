@@ -1,45 +1,57 @@
-import { useState } from "react";
-import "./LoginPage.css";
+import {useContext, useState} from 'react'
+import {AuthContext} from "../context/AuthContext";
+import {useNavigation} from "react-router-dom"
 
 function LoginPage() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+    const {login} = useContext(AuthContext)
+    const navigate = useNavigation();
 
-  return (
-    <div className="login-page">
-      <div className="login-card">
-        <h1 className="login-title">Pairly</h1>
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
 
-        <p className="login-subtitle">
-          Match by taste, not swipes
-        </p>
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+         setError("");
 
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="login-input"
-        />
+         if (!email || !password) {
+            setError("Complete all fields")
+            return;
+         }
 
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className="login-input"
-        />
+         try {
+            await login(email, password);
+            navigate("/");
+         }catch (err){
+            setError("Email or password incorect")
+         }
+    };
 
-        <button className="login-button">
-          Log in
-        </button>
+    return (
+        <div>
+            <h2>Login</h2>
 
-        <p className="login-footer">
-          New here? Create an account
-        </p>
-      </div>
-    </div>
-  );
+            <form onSubmit ={handleSubmit}>
+                <input
+                    type="email"
+                    placeholder="Email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                />
+
+                <input
+                    type="password"
+                    placeholder="Password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                />
+
+                {error && <p>{error}</p>}
+
+                <button type="submit">Enter</button>
+            </form>
+        </div>
+    );
 }
 
 export default LoginPage;
