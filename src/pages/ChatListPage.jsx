@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
-import api from "../services/api";
+import { getUserChats, sendMessage } from "../services/api";
 
 function ChatListPage() {
   const { user, isLoading: authLoading } = useContext(AuthContext);
