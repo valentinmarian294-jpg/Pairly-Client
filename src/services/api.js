@@ -89,7 +89,7 @@ export function getUserTastes() {
 }
 
 export function removeUserTaste(userTasteId) {
-  return authFetch(`${API_URL}/user-tastes/${userTasteId}`, {
+  return authFetch(`${API_URL}/api/user-tastes/${userTasteId}`, {
     method: "DELETE",
   }).then((res) => {
     if (!res.ok) throw new Error("Failed to delete user taste");
