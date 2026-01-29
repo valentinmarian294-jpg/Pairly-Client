@@ -64,14 +64,14 @@ export function verifyToken() {
 }
 
 export function getTasteItems() {
-  return fetch(`${API_URL}/api/taste-items`).then((res) => {
+  return fetch(`${API_URL}/taste-items`).then((res) => {
     if (!res.ok) throw new Error("Failed to fetch taste items");
     return res.json();
   });
 }
 
 export function addUserTaste(tasteItemId) {
-  return authFetch(`${API_URL}/api/user-tastes`, {
+  return authFetch(`${API_URL}/user-tastes`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ tasteItemId }),
@@ -82,14 +82,14 @@ export function addUserTaste(tasteItemId) {
 }
 
 export function getUserTastes() {
-  return authFetch(`${API_URL}/api/user-tastes`).then((res) => {
+  return authFetch(`${API_URL}/user-tastes`).then((res) => {
     if (!res.ok) throw new Error("Failed to fetch user tastes");
     return res.json();
   });
 }
 
 export function removeUserTaste(userTasteId) {
-  return authFetch(`${API_URL}/api/user-tastes/${userTasteId}`, {
+  return authFetch(`${API_URL}/user-tastes/${userTasteId}`, {
     method: "DELETE",
   }).then((res) => {
     if (!res.ok) throw new Error("Failed to delete user taste");
