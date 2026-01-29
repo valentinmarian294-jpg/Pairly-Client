@@ -64,14 +64,14 @@ export function verifyToken() {
 }
 
 export function getTasteItems() {
-  return fetch(`${API_URL}/taste-items`).then((res) => {
+  return fetch(`${API_URL}/api/taste-items`).then((res) => {
     if (!res.ok) throw new Error("Failed to fetch taste items");
     return res.json();
   });
 }
 
 export function addUserTaste(tasteItemId) {
-  return authFetch(`${API_URL}/user-tastes`, {
+  return authFetch(`${API_URL}/api/user-tastes`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ tasteItemId }),
