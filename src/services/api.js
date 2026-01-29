@@ -82,7 +82,7 @@ export function addUserTaste(tasteItemId) {
 }
 
 export function getUserTastes() {
-  return authFetch(`${API_URL}/user-tastes`).then((res) => {
+  return authFetch(`${API_URL}/api/user-tastes`).then((res) => {
     if (!res.ok) throw new Error("Failed to fetch user tastes");
     return res.json();
   });
